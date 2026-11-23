@@ -1,0 +1,106 @@
+.module-hoje { display: grid; gap: 14px; align-content: start; }
+.hoje-hello { margin: 0; font: 600 22px/1.2 var(--font-text); }
+.module-hoje .card-title { margin-bottom: 8px; }
+
+.hoje-top { display: grid; grid-template-columns: 200px 1fr; gap: 14px; align-items: stretch; }
+
+/* Folhinha de parede */
+.folhinha {
+  display: grid; justify-items: center; align-content: start;
+  padding: 0 8px 12px;
+  background: var(--sheet); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+}
+.folhinha-bind {
+  width: calc(100% + 16px); height: 16px; background: var(--bind);
+  background-image: radial-gradient(circle at 30% 50%, var(--paper) 3px, transparent 3.5px),
+                    radial-gradient(circle at 70% 50%, var(--paper) 3px, transparent 3.5px);
+}
+.folhinha-month { margin-top: 10px; font-size: 17px; color: var(--ink-2); }
+.folhinha-num { font-size: 104px; margin-top: 2px; letter-spacing: -.02em; }
+.folhinha-weekday { font-size: 19px; color: var(--ink-2); }
+.folhinha-weekday.is-domingo, .folhinha-num.is-domingo { color: var(--domingo); }
+.folhinha-hol { margin-top: 4px; font-size: 12px; font-weight: 600; color: var(--domingo); text-align: center; }
+
+.hoje-facts { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 9px 16px; align-content: center; }
+.hoje-facts dt { color: var(--muted); font-size: 13px; }
+.hoje-facts dd { margin: 0; font-weight: 600; }
+.hj-moon-row { display: inline-flex; align-items: center; gap: 6px; }
+.hj-moon svg { width: 18px; height: 18px; display: block; }
+.hj-moon .moon-dark { fill: var(--line); }
+.hj-moon .moon-lit { fill: var(--marker); }
+.hj-moon .moon-rim { fill: none; stroke: var(--muted); stroke-width: .8; }
+
+/* Listas */
+.hj-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.hj-ev {
+  display: flex; align-items: center; gap: 10px; padding: 6px 8px;
+  border-left: 3px solid var(--cat, var(--line)); border-radius: 6px; background: var(--sheet-2);
+}
+.hj-ev.is-past { opacity: .55; }
+.hj-time { flex: none; width: 96px; font-size: 12.5px; color: var(--ink-2); }
+.hj-ev-title { flex: 1; min-width: 0; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hj-badge { flex: none; padding: 1px 7px; border-radius: 9px; font-size: 11px; font-weight: 700; }
+.hj-badge.is-now { background: var(--ok); color: #FFFFFF; }
+.hj-badge.is-next { background: var(--hl); color: var(--ink); }
+
+/* Tarefas do dia: o destaque da aba (traço amarelo, título na fonte da folhinha, letra maior). */
+.hj-today { box-shadow: inset 4px 0 0 var(--marker); padding-left: 20px; }
+.hj-today-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+.hj-today-title { margin: 0; font-size: 28px; color: var(--ink); }
+.hj-today-count { font-size: 28px; color: var(--ink); background: var(--hl); padding: 0 6px; border-radius: 4px; }
+.hj-today-empty { margin: 0; font-size: 15px; font-weight: 600; color: var(--ink-2); }
+.hj-today .hj-task { gap: 10px; padding: 7px 2px; }
+.hj-today .hj-list { gap: 0; }
+.hj-today .hj-task + .hj-task { border-top: 1px solid var(--line-2); }
+.hj-today .hj-task-title { font-size: 15px; font-weight: 600; }
+.hj-today .hj-check { width: 20px; height: 20px; }
+.hj-today .hj-due, .hj-today .hj-cat { font-size: 12px; }
+.hj-star { flex: none; margin-right: -4px; color: var(--marker); font-size: 15px; line-height: 1; }
+.hj-group.is-doing { margin-top: 14px; }
+.hj-group.is-doing .hj-task-title { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+.hj-group.is-doing .hj-check { width: 16px; height: 16px; }
+
+.hj-group + .hj-group { margin-top: 10px; }
+.hj-group-title { margin: 0 0 2px; font-size: 12px; font-weight: 700; color: var(--ink-2); }
+.hj-group.is-late .hj-group-title { color: var(--danger); }
+
+.hj-task { display: flex; align-items: center; gap: 8px; padding: 4px 2px; min-width: 0; }
+.hj-task-title { flex: 1; min-width: 0; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hj-due { flex: none; font-size: 11px; font-weight: 700; color: var(--muted); }
+.hj-due.is-late { color: var(--danger); }
+.hj-due.is-today { color: var(--ink); background: var(--hl); padding: 0 4px; border-radius: 3px; }
+.hj-cat { flex: none; font-size: 11px; font-weight: 600; color: var(--cat, var(--muted)); }
+.hj-check {
+  flex: none; width: 16px; height: 16px; padding: 0; border-radius: 50%;
+  border: 2px solid var(--muted); background: transparent; cursor: pointer;
+  display: inline-grid; place-items: center;
+}
+.hj-check:hover { border-color: var(--ok); background: var(--ok-soft); }
+.hj-check:hover::after { content: ''; width: 4px; height: 8px; margin-top: -2px; border: solid var(--ok); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+
+/* Tempo na cidade (lib/clima.js, Open-Meteo) */
+.hj-weather { display: grid; gap: 10px; }
+.hj-w-head { display: flex; align-items: center; gap: 10px; }
+.hj-w-head .card-title { flex: 1; min-width: 0; margin: 0; }
+.hj-w-change { height: 26px; padding: 0 8px; font-size: 12px; }
+.hj-w-main { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.hj-w-now { display: flex; align-items: center; gap: 10px; }
+.hj-w-emoji { font-size: 40px; line-height: 1; }
+.hj-w-temp { font-size: 52px; }
+.hj-w-desc { display: grid; gap: 1px; }
+.hj-w-facts { flex: 1; min-width: 220px; margin: 0; display: grid; grid-template-columns: repeat(3, auto 1fr); gap: 5px 10px; align-items: baseline; }
+.hj-w-facts dt { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.hj-w-facts dd { margin: 0; font-weight: 600; font-size: 13px; white-space: nowrap; }
+.hj-w-hours { list-style: none; margin: 0; padding: 8px 0 0; display: flex; gap: 4px; overflow-x: auto; border-top: 1px solid var(--line-2); }
+.hj-w-hour { flex: 1 0 58px; display: grid; justify-items: center; gap: 2px; padding: 4px 2px; border-radius: 8px; background: var(--sheet-2); }
+.hj-w-hemoji { font-size: 20px; line-height: 1.1; }
+.hj-w-wet { color: var(--pen); font-weight: 700; }
+.hj-w-error { color: var(--danger); margin: 0; }
+.hj-w-search { display: flex; gap: 8px; }
+.hj-w-search .input { flex: 1; min-width: 0; }
+.hj-w-results { display: grid; gap: 4px; }
+.hj-w-city { text-align: left; padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--sheet); color: var(--ink); cursor: pointer; }
+.hj-w-city:hover { border-color: var(--pen); background: var(--pen-soft); }
+@media (max-width: 560px) {
+  .hj-w-facts { flex-basis: 100%; grid-template-columns: repeat(2, auto 1fr); min-width: 0; }
+}

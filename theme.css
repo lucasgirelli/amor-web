@@ -1,0 +1,174 @@
+/* Central: tokens e componentes. Identidade de folhinha de parede. */
+@import url('./fonts/fonts.css');
+
+:root {
+  color-scheme: light;
+  --paper: #EEF0EC; --sheet: #FFFFFF; --sheet-2: #F6F7F4;
+  --ink: #15181C; --ink-2: #454D56; --muted: #6B737D;
+  --line: #D6D9D3; --line-2: #E4E6E1;
+  --pen: #2340C8; --pen-soft: #E2E7FA;
+  --marker: #F6D924; --hl: rgba(246, 217, 36, .72);
+  --domingo: #C3302A; --danger: #B8322A; --ok: #1F7A4C; --ok-soft: #DFF0E6;
+  --bind: #1C2027;
+
+  /* barra lateral */
+  --nav-hover: #F3F4F1; --nav-active: #ECEEEA;
+
+  /* faixa da folhinha (pílula): igual nos dois temas */
+  --strip: #1C2027; --strip-ink: #E8EBEE; --strip-muted: #9AA3AD;
+
+  --cat-pessoal: #2F5BD8; --cat-faculdade: #0B8584; --cat-provas: #C02A4A;
+  --cat-tcc: #94602A; --cat-estagio: #7B4AD0; --cat-saude: #2E8B47;
+  --cat-financas: #B7860B; --cat-casa: #C2457A; --cat-lazer: #D2691E;
+
+  --font-display: 'Big Shoulders Display', 'Bahnschrift Condensed', 'Arial Narrow', sans-serif;
+  --font-text: 'Onest', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Cascadia Mono', Consolas, monospace;
+
+  --radius: 12px; --radius-sm: 8px;
+  --shadow: 0 10px 30px rgba(17, 20, 24, .22), 0 2px 6px rgba(17, 20, 24, .12);
+  --dur: 180ms;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --paper: #0F1114; --sheet: #171A1F; --sheet-2: #1C2026;
+    --ink: #E8EBEE; --ink-2: #B9C0C8; --muted: #8B939D;
+    --line: #2B3038; --line-2: #22262D;
+    --pen: #8FA3FF; --pen-soft: #20284A;
+    --marker: #E6CB2A; --hl: rgba(230, 203, 42, .32);
+    --domingo: #FF7468; --danger: #FF7B6E; --ok: #4FC786; --ok-soft: #14301F;
+    --bind: #2C323B;
+    --nav-hover: #1E2228; --nav-active: #252A31;
+
+    --cat-pessoal: #7D9BF2; --cat-faculdade: #3CC4C2; --cat-provas: #F27A92;
+    --cat-tcc: #D3A26B; --cat-estagio: #B391F2; --cat-saude: #6BCB84;
+    --cat-financas: #E6BF4A; --cat-casa: #F08CB6; --cat-lazer: #F4A15E;
+    --shadow: 0 12px 34px rgba(0, 0, 0, .55), 0 2px 8px rgba(0, 0, 0, .4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur: 0ms; }
+}
+
+/* Base ---------------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; }
+body {
+  font: 400 14px/1.45 var(--font-text);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+button, input, textarea, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
+[hidden] { display: none !important; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; border: 3px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--muted); }
+
+/* Tipografia ---------------------------------------------------------------------------- */
+.display { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: .02em; line-height: 1; }
+.num { font-family: var(--font-display); font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; }
+.mono { font-family: var(--font-mono); }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.is-domingo { color: var(--domingo); }
+.hl { background: linear-gradient(transparent 18%, var(--hl) 18%, var(--hl) 88%, transparent 88%); padding: 0 .2em; margin: 0 -.2em; }
+
+/* Componentes --------------------------------------------------------------------------- */
+.card {
+  background: var(--sheet);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.card-title { font: 700 13px/1.2 var(--font-text); color: var(--ink-2); margin: 0 0 10px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 32px; padding: 0 12px;
+  border: 1px solid var(--line); border-radius: var(--radius-sm);
+  background: var(--sheet); color: var(--pen);
+  font-weight: 600; font-size: 13px; cursor: pointer;
+  transition: background var(--dur) ease, border-color var(--dur) ease;
+}
+.btn:hover { background: var(--pen-soft); border-color: var(--pen); }
+.btn-primary { background: var(--pen); border-color: var(--pen); color: var(--sheet); }
+.btn-primary:hover { background: var(--pen); filter: brightness(1.08); }
+.btn-danger { color: var(--danger); }
+.btn-danger:hover { background: transparent; border-color: var(--danger); }
+.btn-danger.btn-primary { background: var(--danger); border-color: var(--danger); color: var(--sheet); }
+.btn-ghost { border-color: transparent; background: transparent; }
+.icon-btn {
+  display: inline-grid; place-items: center; width: 32px; height: 32px;
+  border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--ink-2); cursor: pointer;
+}
+.icon-btn:hover { background: var(--pen-soft); color: var(--pen); }
+.icon-btn svg, .btn svg { width: 18px; height: 18px; }
+
+.field { display: grid; gap: 6px; }
+.field > span { font-size: 12px; font-weight: 600; color: var(--ink-2); }
+.input {
+  height: 34px; padding: 0 10px; width: 100%;
+  border: 1px solid var(--line); border-radius: var(--radius-sm);
+  background: var(--sheet); color: var(--ink); user-select: text;
+}
+.input:focus { outline: none; border-color: var(--pen); box-shadow: 0 0 0 3px var(--pen-soft); }
+.input[readonly] { background: var(--sheet-2); color: var(--ink-2); }
+
+.switch { position: relative; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.switch .track {
+  width: 36px; height: 20px; border-radius: 20px; background: var(--line);
+  position: relative; transition: background var(--dur) ease; flex: none;
+}
+.switch .track::after {
+  content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--sheet); box-shadow: 0 1px 2px rgba(0, 0, 0, .3); transition: transform var(--dur) var(--ease);
+}
+.switch input:checked + .track { background: var(--pen); }
+.switch input:checked + .track::after { transform: translateX(16px); }
+.switch input:focus-visible + .track { outline: 2px solid var(--pen); outline-offset: 2px; }
+
+/* Seletor segmentado (ex.: Alta | Média | Baixa) */
+.field > .seg { justify-self: start; }
+.seg { display: inline-flex; padding: 2px; gap: 2px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--sheet-2); }
+.seg-btn {
+  height: 28px; padding: 0 12px; border: 0; border-radius: 6px;
+  background: transparent; color: var(--ink-2); font-weight: 600; font-size: 13px; cursor: pointer;
+}
+.seg-btn:hover { color: var(--ink); }
+.seg-btn.is-on { background: var(--sheet); color: var(--pen); box-shadow: 0 1px 2px rgba(0, 0, 0, .12); }
+
+select.input { padding-right: 6px; }
+input[type="date"].input, input[type="time"].input { font-family: var(--font-mono); font-size: 13px; }
+input[type="date"]::-webkit-calendar-picker-indicator, input[type="time"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .6; }
+textarea.input { height: auto; padding: 8px 10px; resize: vertical; }
+
+/* Editor de evento (lib/evento-editor.js), usado pela Agenda e pela Rotina */
+.ev-editor { display: grid; gap: 12px; }
+.ev-editor h1 { margin: 0; font-size: 26px; }
+.ev-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: end; }
+.ev-switch-cell { align-self: end; padding-bottom: 7px; }
+.ev-where { margin: -4px 0 0; }
+.ev-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 4px; }
+.ev-foot-left, .ev-foot-right { display: flex; gap: 8px; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 8px;
+  border-radius: 11px; font-size: 12px; font-weight: 600;
+  background: var(--sheet-2); color: var(--ink-2); border: 1px solid var(--line-2);
+}
+.chip::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--chip-color, var(--muted)); }
+
+.empty {
+  display: grid; place-items: center; text-align: center; gap: 6px;
+  padding: 28px 16px; color: var(--muted);
+  border: 1px dashed var(--line); border-radius: var(--radius);
+}
+.empty strong { color: var(--ink-2); font-weight: 600; }
